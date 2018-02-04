@@ -54,7 +54,8 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
             });
 
             var message = {
-                attachments: attachments
+                attachments: attachments,
+                as_user: true
             }
 
             slack.chat.postMessage(channel, 'Jenkins jobs', message)
