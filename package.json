@@ -1,0 +1,9 @@
+{
+  "name": "baldrick",
+  "version": "1.0.0",
+  "dependencies": {
+    "@slack/client": "^3.16.0",
+    "jenkins": "^0.20.1",
+    "underscore": "^1.8.3"
+  }
+}
