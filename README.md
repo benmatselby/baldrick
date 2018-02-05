@@ -1,6 +1,8 @@
 Baldrick
 ========
 
+[![Build Status](https://travis-ci.org/benmatselby/baldrick.png?branch=master)](https://travis-ci.org/benmatselby/baldrick)
+
 A slack bot that can do stuff for the team
 
 ## Configuration
