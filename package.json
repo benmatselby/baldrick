@@ -5,5 +5,11 @@
     "@slack/client": "^3.16.0",
     "jenkins": "^0.20.1",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "standard": "^10.0.3"
+  },
+  "scripts": {
+    "test": "./node_modules/standard/bin/cmd.js"
   }
 }
