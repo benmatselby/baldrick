@@ -1,12 +1,10 @@
 const _ = require('underscore');
-const { WebClient, RtmClient, RTM_EVENTS } = require('@slack/client');
 const token = process.env.BALDRICK_SLACK_TOKEN;
-
+const { WebClient, RtmClient, RTM_EVENTS } = require('@slack/client');
 const rtm = new RtmClient(token, {
   dataStore: false,
   useRtmConnect: true,
 });
-
 const slack = new WebClient(token);
 const jenkins = require('jenkins')({ baseUrl: process.env.BALDRICK_JENKINS_URL });
 
@@ -15,7 +13,16 @@ console.log('Jenkins: '+process.env.BALDRICK_JENKINS_URL);
 rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     if (message.type === 'message' && /jenkins list/i.test(message.text)) {
         var channel = message.channel;
+        var keywords = message.text.split(" ");
+        var onlyGood = false, onlyBad = false;
 
+        if (!_.isEmpty(_.intersection(keywords, ['success', 'good']))) {
+            onlyGood = true;
+        }
+
+        if (!_.isEmpty(_.intersection(keywords, ['failed', 'broken', 'bad']))) {
+            onlyBad = true;
+        }
 
         jenkins.job.list(function(err, data) {
             if (err) {
@@ -25,14 +32,9 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
                 return;
             }
 
-            var attachments = [],
-                counter = 0;
+            var attachments = [];
 
             _.each(data, function(job) {
-                if (counter > 30) {
-                    return false;
-                }
-
                 switch (job.color) {
                     case "red":
                         color = "danger";
@@ -45,16 +47,23 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
                         break;
                 }
 
+                if (job.color !== 'red' && onlyBad) {
+                    return;
+                }
+
+                if (job.color !== 'blue' && onlyGood) {
+                    return;
+                }
+
                 attachments.push({
                     fallback: job.name,
                     text: "<" + job.url + "|" + job.name + ">",
                     color: color
                 });
-                counter++;
             });
 
             var message = {
-                attachments: attachments,
+                attachments: attachments.slice(0,100), // Should be a config item
                 as_user: true
             }
 
