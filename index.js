@@ -16,7 +16,6 @@ slack.auth.test()
   })
 
 rtm.on(RTM_EVENTS.MESSAGE, (message) => {
-
   if (!config.isBotIdSet()) {
     return
   }
