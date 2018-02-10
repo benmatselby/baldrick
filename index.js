@@ -6,19 +6,34 @@ const rtm = new RtmClient(token, {
 })
 const slack = new WebClient(token)
 const jenkins = require('./lib/jenkins')
+const config = require('./lib/config')
+
+// Might be a better way of doing this?
+slack.auth.test()
+  .then((res) => {
+    config.setBotId(res.user_id)
+    config.setBotName(res.user)
+  })
 
 rtm.on(RTM_EVENTS.MESSAGE, (message) => {
-  if (message.type === 'message' && /jenkins/i.test(message.text)) {
+
+  if (!config.isBotIdSet()) {
+    return
+  }
+
+  if (message.type === 'message' &&
+    /jenkins/i.test(message.text) &&
+    message.user !== config.getBodId()) {
     jenkins.handleMessage(message)
       .then(data => (
         slack.chat.postMessage(message.channel, data.text, data)
           .then((res) => { })
           .catch(console.error)
      ))
-     .catch(() => (
-        slack.chat.postMessage(message.channel, 'Something went wrong with the space time continuum', {as_user: true})
+     .catch((err) => (
+        slack.chat.postMessage(message.channel, err.message, {as_user: true})
           .then((res) => { })
-          .catch(console.error)
+          .catch(console.error(err))
      ))
   }
 })
