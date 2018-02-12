@@ -11,12 +11,12 @@ explain:
 	### Execution
 	#
 	# Locally:
-	#   -< $$ export BALDRICK_SLACK_TOKEN='slack-token'
+	#   -> $$ export BALDRICK_SLACK_TOKEN='slack-token'
 	#   -> $$ export BALDRICK_JENKINS_URL='https://jenkins.url'
 	#   -> $$ node index.js
 	#
 	# Docker:
-	#   -< $$ export BALDRICK_SLACK_TOKEN='slack-token'
+	#   -> $$ export BALDRICK_SLACK_TOKEN='slack-token'
 	#   -> $$ export BALDRICK_JENKINS_URL='https://jenkins.url'
 	#   -> $$ docker run -d --rm -eBALDRICK_SLACK_TOKEN -eBALDRICK_JENKINS_URL benmatselby/baldrick
 	#

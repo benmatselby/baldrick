@@ -15,4 +15,4 @@ $ export BALDRICK_JENKINS_URL='https://jenkins.url'
 ## What can we do
 
 * `jenkins list [broken|bad|failed|good|success]` - Displays a list of Jenkins jobs
-* `jenkins build [job name[` - Build a Jenkins job
+* `jenkins build [job name]` - Build a Jenkins job
