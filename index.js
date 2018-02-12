@@ -15,6 +15,12 @@ slack.auth.test()
     config.setBotName(res.user)
   })
 
+rtm.on(RTM_EVENTS.CHANNEL_JOINED, (message) => {
+  slack.chat.postMessage(message.channel.id, config.getChannelJoinedMsg(), {as_user: true})
+    .then((res) => { })
+    .catch(console.error)
+})
+
 rtm.on(RTM_EVENTS.MESSAGE, (message) => {
   if (!config.isBotIdSet()) {
     return
