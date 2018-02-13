@@ -30,11 +30,13 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     /jenkins/i.test(message.text) &&
     message.user !== config.getBotId()) {
     jenkins.handleMessage(message)
-      .then(data => (
-        slack.chat.postMessage(message.channel, data.text, data)
-          .then((res) => { })
-          .catch(console.error)
-     ))
+      .then(data => {
+        if (data && data.text) {
+          slack.chat.postMessage(message.channel, data.text, data)
+            .then((res) => { })
+            .catch(console.error)
+        }
+      })
      .catch((err) => (
         slack.chat.postMessage(message.channel, err.message, {as_user: true})
           .then((res) => { })
