@@ -28,7 +28,7 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
 
   if (message.type === 'message' &&
     /jenkins/i.test(message.text) &&
-    message.user !== config.getBodId()) {
+    message.user !== config.getBotId()) {
     jenkins.handleMessage(message)
       .then(data => (
         slack.chat.postMessage(message.channel, data.text, data)
