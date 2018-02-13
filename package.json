@@ -7,9 +7,10 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "mocha": "^5.0.0",
     "standard": "^10.0.3"
   },
   "scripts": {
-    "test": "./node_modules/standard/bin/cmd.js"
+    "test": "make checkstyle test"
   }
 }

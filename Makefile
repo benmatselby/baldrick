@@ -33,3 +33,11 @@ install:
 .PHONY: docker-build
 docker-build:
 	docker build -t benmatselby/baldrick .
+
+.PHONY: test
+test:
+	./node_modules/.bin/mocha --recursive
+
+.PHONY: checkstyle
+checkstyle:
+	./node_modules/standard/bin/cmd.js
