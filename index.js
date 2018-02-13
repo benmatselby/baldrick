@@ -27,19 +27,17 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     return
   }
 
-  var botMention = new RegExp('/' + config.getBotId() + '/')
-  if (!(botMention.test(message.text) || message.channel.substring(0, 1) === 'D')) {
-    return
-  }
-
   // If the bot is the sender of the message, ignore (for now)
   if (message.user === config.getBotId()) {
     return
   }
 
-  if (message.type === 'message' &&
-    /jenkins/i.test(message.text) &&
-    message.user !== config.getBotId()) {
+  var botMention = new RegExp(config.getBotId())
+  if (!(botMention.test(message.text) || message.channel.substring(0, 1) === 'D')) {
+    return
+  }
+
+  if (message.type === 'message' && /jenkins/i.test(message.text)) {
     jenkins.handleMessage(message)
       .then(data => {
         if (data && data.text) {
