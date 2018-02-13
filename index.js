@@ -22,7 +22,18 @@ rtm.on(RTM_EVENTS.CHANNEL_JOINED, (message) => {
 })
 
 rtm.on(RTM_EVENTS.MESSAGE, (message) => {
+  // We need to know the bot id before we start processing messages
   if (!config.isBotIdSet()) {
+    return
+  }
+
+  var botMention = new RegExp('/' + config.getBotId() + '/')
+  if (!(botMention.test(message.text) || message.channel.substring(0, 1) === 'D')) {
+    return
+  }
+
+  // If the bot is the sender of the message, ignore (for now)
+  if (message.user === config.getBotId()) {
     return
   }
 
