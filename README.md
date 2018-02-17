@@ -9,6 +9,7 @@ A slack bot that can do stuff for the team
 
 * `jenkins list [broken|bad|failed|good|success]` - Displays a list of jenkins jobs
 * `jenkins build [job name]` - Build a Jenkins job
+* `jenkins job [job name]` - Get some overview of the job
 * `jenkins view [view name]` - Display a list of jenkins jobs from the view
 
 

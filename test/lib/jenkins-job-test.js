@@ -56,4 +56,62 @@ describe('Jenkins Job', function () {
       assert.equal(job.getColor(), '#d8d8d8')
     })
   })
+  describe('Description', function () {
+    it('Should return descripton', function () {
+      var job = new Job({
+        'description': 'This is the description'
+      })
+
+      assert.equal(job.getDescription(), 'This is the description')
+    })
+  })
+  describe('Health Report', function () {
+    it('Should build an array of health data', function () {
+      var job = new Job({
+        healthReport: [
+          {
+            description: 'Item 1'
+          },
+          {
+            description: 'Item 2'
+          }
+        ]
+      })
+
+      var expected = ['Item 1', 'Item 2']
+      assert.deepEqual(job.getHealthReport(), expected)
+    })
+  })
+  describe('Overview', function () {
+    it('Should build a neat array with information', function () {
+      var job = new Job({
+        name: 'The job',
+        description: 'The description',
+        healthReport: [
+          {
+            description: 'Item 1'
+          },
+          {
+            description: 'Item 2'
+          }
+        ]
+      })
+
+      var expected = [
+        {
+          key: 'Name',
+          value: 'The job'
+        },
+        {
+          key: 'Description',
+          value: 'The description'
+        },
+        {
+          key: 'Health',
+          value: 'Item 1\nItem 2'
+        }
+      ]
+      assert.deepEqual(job.getOverview(), expected)
+    })
+  })
 })
