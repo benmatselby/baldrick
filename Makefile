@@ -25,6 +25,7 @@ explain:
 .PHONY: clean
 clean:
 	rm -fr node_modules
+	mkdir -p buld/coverage
 
 .PHONY: install
 install:
@@ -37,6 +38,10 @@ docker-build:
 .PHONY: test
 test:
 	./node_modules/.bin/mocha --recursive
+
+.PHONY: test-cov
+test-cov:
+	./node_modules/.bin/nyc --report-dir ./build/coverage --reporter=html --reporter=text --temp-directory ./build/coverage ./node_modules/.bin/mocha --recursive
 
 .PHONY: checkstyle
 checkstyle:
