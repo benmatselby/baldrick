@@ -57,7 +57,7 @@ describe('Jenkins Job', function () {
     })
   })
   describe('Description', function () {
-    it('Should return descripton', function () {
+    it('should return descripton', function () {
       var job = new Job({
         'description': 'This is the description'
       })
@@ -66,7 +66,7 @@ describe('Jenkins Job', function () {
     })
   })
   describe('Health Report', function () {
-    it('Should build an array of health data', function () {
+    it('should build an array of health data', function () {
       var job = new Job({
         healthReport: [
           {
@@ -83,7 +83,7 @@ describe('Jenkins Job', function () {
     })
   })
   describe('Overview', function () {
-    it('Should build a neat array with information', function () {
+    it('should build a neat array with information', function () {
       var job = new Job({
         name: 'The job',
         description: 'The description',
