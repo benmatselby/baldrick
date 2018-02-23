@@ -33,7 +33,7 @@ describe('Jenkins Integration', function () {
       var message = {
         text: 'list them'
       }
-      sinon.stub(jenkins, 'getList').returns(Promise.resolve())
+      sinon.stub(jenkins, 'getList').resolves()
       sinon.stub(jenkins, 'buildJob')
       sinon.stub(jenkins, 'getView')
       sinon.stub(jenkins, 'getJob')
