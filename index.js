@@ -1,9 +1,6 @@
 const token = process.env.BALDRICK_SLACK_TOKEN
-const { WebClient, RtmClient, RTM_EVENTS } = require('@slack/client')
-const rtm = new RtmClient(token, {
-  dataStore: false,
-  useRtmConnect: true
-})
+const { WebClient, RTMClient } = require('@slack/client')
+const rtm = new RTMClient(token, {})
 const slack = new WebClient(token)
 const jenkins = require('./lib/jenkins')
 const config = require('./lib/config')
@@ -15,13 +12,13 @@ slack.auth.test()
     config.setBotName(res.user)
   })
 
-rtm.on(RTM_EVENTS.CHANNEL_JOINED, (message) => {
-  slack.chat.postMessage(message.channel.id, config.getChannelJoinedMsg(), {as_user: true})
+rtm.on('channel_joined', (message) => {
+  slack.chat.postMessage({channel: message.channel.id, text: config.getChannelJoinedMsg(), as_user: true})
     .then((res) => { })
     .catch(console.error)
 })
 
-rtm.on(RTM_EVENTS.MESSAGE, (message) => {
+rtm.on('message', (message) => {
   // We need to know the bot id before we start processing messages
   if (!config.isBotIdSet()) {
     return
@@ -41,16 +38,16 @@ rtm.on(RTM_EVENTS.MESSAGE, (message) => {
     jenkins.handleMessage(message)
       .then(data => {
         if (data && data.text) {
-          slack.chat.postMessage(message.channel, data.text, data)
+          slack.chat.postMessage({channel: message.channel, text: data.text, attachments: data.attachments, as_user: true})
             .then((res) => { })
             .catch(console.error)
         }
       })
-     .catch((err) => (
-        slack.chat.postMessage(message.channel, err.message, {as_user: true})
+      .catch((err) => {
+        slack.chat.postMessage({channel: message.channel, text: err.message, as_user: true})
           .then((res) => { })
-          .catch(console.error(err))
-     ))
+          .catch(console.error)
+      })
   }
 })
 
