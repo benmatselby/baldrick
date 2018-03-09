@@ -1,4 +1,4 @@
-FROM node:9.5-alpine
+FROM node:9-alpine
 LABEL maintainer="Ben Selby <benmatselby@gmail.com>"
 
 RUN apk update && \
