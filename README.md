@@ -2,6 +2,7 @@ Baldrick
 ========
 
 [![Build Status](https://travis-ci.org/benmatselby/baldrick.png?branch=master)](https://travis-ci.org/benmatselby/baldrick)
+[![codecov](https://codecov.io/gh/benmatselby/baldrick/branch/master/graph/badge.svg)](https://codecov.io/gh/benmatselby/baldrick)
 
 A slack bot that can do stuff for the team
 

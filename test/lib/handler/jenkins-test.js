@@ -3,7 +3,7 @@
 process.env.BALDRICK_JENKINS_URL = 'http://example.com'
 
 var assert = require('assert')
-var jenkins = require('../../lib/jenkins')
+var jenkins = require('../../../lib/handler/jenkins')
 var sinon = require('sinon')
 
 describe('Jenkins Integration', function () {

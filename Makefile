@@ -46,3 +46,7 @@ test-cov:
 .PHONY: vet
 vet:
 	./node_modules/standard/bin/cmd.js
+
+.PHONY: vet-fix
+vet-fix:
+	./node_modules/standard/bin/cmd.js --fix
