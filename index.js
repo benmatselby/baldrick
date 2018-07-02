@@ -2,7 +2,7 @@ const token = process.env.BALDRICK_SLACK_TOKEN
 const { WebClient, RTMClient } = require('@slack/client')
 const rtm = new RTMClient(token, {})
 const slack = new WebClient(token)
-const jenkins = require('./lib/jenkins')
+const jenkins = require('./lib/handler/jenkins')
 const config = require('./lib/config')
 
 // Might be a better way of doing this?
