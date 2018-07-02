@@ -6,7 +6,7 @@ notifications:
   email: true
 
 script:
-  - make install vet test-cov
+  - make clean install vet test-cov-travis
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
