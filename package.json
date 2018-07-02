@@ -2,15 +2,15 @@
   "name": "baldrick",
   "version": "1.0.0",
   "dependencies": {
-    "@slack/client": "^4.0.0",
-    "jenkins": "^0.20.1",
-    "underscore": "^1.8.3"
+    "@slack/client": "^4.3.1",
+    "jenkins": "^0.22.1",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
-    "mocha": "^5.0.4",
-    "nyc": "^11.5.0",
-    "sinon": "^4.4.2",
-    "standard": "^10.0.3"
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "sinon": "^6.0.1",
+    "standard": "^11.0.1"
   },
   "scripts": {
     "test": "make checkstyle test"
