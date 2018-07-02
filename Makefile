@@ -25,7 +25,7 @@ explain:
 .PHONY: clean
 clean:
 	rm -fr node_modules
-	mkdir -p buld/coverage
+	mkdir -p build/coverage
 
 .PHONY: install
 install:
@@ -42,6 +42,10 @@ test:
 .PHONY: test-cov
 test-cov:
 	./node_modules/.bin/nyc --report-dir ./build/coverage --reporter=html --reporter=text --temp-directory ./build/coverage ./node_modules/.bin/mocha --recursive
+
+.PHONY: test-cov-travis
+test-cov-travis:
+	./node_modules/.bin/nyc --reporter=text-lcov > ./build/coverage/coverage.lcov ./node_modules/.bin/mocha --recursive
 
 .PHONY: vet
 vet:
