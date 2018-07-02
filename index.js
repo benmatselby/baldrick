@@ -2,7 +2,8 @@ const token = process.env.BALDRICK_SLACK_TOKEN
 const { WebClient, RTMClient } = require('@slack/client')
 const rtm = new RTMClient(token, {})
 const slack = new WebClient(token)
-const jenkins = require('./lib/handler/jenkins')
+const jenkinHandler = require('./lib/handler/jenkins')
+const pingHandler = require('./lib/handler/ping')
 const config = require('./lib/config')
 
 // Might be a better way of doing this?
@@ -35,10 +36,26 @@ rtm.on('message', (message) => {
   }
 
   if (message.type === 'message' && /jenkins/i.test(message.text)) {
-    jenkins.handleMessage(message)
+    jenkinHandler.handleMessage(message)
       .then(data => {
         if (data && data.text) {
           slack.chat.postMessage({channel: message.channel, text: data.text, attachments: data.attachments, as_user: true})
+            .then((res) => { })
+            .catch(console.error)
+        }
+      })
+      .catch((err) => {
+        slack.chat.postMessage({channel: message.channel, text: err.message, as_user: true})
+          .then((res) => { })
+          .catch(console.error)
+      })
+  }
+
+  if (message.type === 'message' && /ping/i.test(message.text)) {
+    pingHandler.handleMessage(message)
+      .then(data => {
+        if (data && data.text) {
+          slack.chat.postMessage({channel: message.channel, text: data.text, as_user: true})
             .then((res) => { })
             .catch(console.error)
         }
