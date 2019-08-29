@@ -1,40 +1,35 @@
-Baldrick
-========
-
-[![Build Status](https://travis-ci.org/benmatselby/baldrick.png?branch=master)](https://travis-ci.org/benmatselby/baldrick)
-[![codecov](https://codecov.io/gh/benmatselby/baldrick/branch/master/graph/badge.svg)](https://codecov.io/gh/benmatselby/baldrick)
+# Baldrick
 
 A slack bot that can do stuff for the team
 
 ## What we can do
 
-* `jenkins list [broken|bad|failed|good|success]` - Displays a list of jenkins jobs
-* `jenkins build [job name]` - Build a Jenkins job
-* `jenkins job [job name]` - Get some overview of the job
-* `jenkins view [view name]` - Display a list of jenkins jobs from the view
-
+- `jenkins list [broken|bad|failed|good|success]` - Displays a list of jenkins jobs
+- `jenkins build [job name]` - Build a Jenkins job
+- `jenkins job [job name]` - Get some overview of the job
+- `jenkins view [view name]` - Display a list of jenkins jobs from the view
 
 ## Configuration
 
-```
-$ export BALDRICK_SLACK_TOKEN='slack-token'
-$ export BALDRICK_JENKINS_URL='https://jenkins.url'
+```shell
+export BALDRICK_SLACK_TOKEN='slack-token'
+export BALDRICK_JENKINS_URL='https://jenkins.url'
 ```
 
 ## Installation
 
 You can check this out from git and run that way, or in a docker container
 
-**Git**
+### Git
 
-```
-$ git clone git@github.com:benmatselby/baldrick.git
-$ cd baldrick
-$ make clean install
-$ node index.js
+```shell
+git clone git@github.com:benmatselby/baldrick.git
+cd baldrick
+make clean install
+node index.js
 ```
 
-**Docker**
+### Docker
 
 ```bash
 $ docker run \
