@@ -4,7 +4,7 @@
   "dependencies": {
     "@slack/client": "^4.3.1",
     "jenkins": "^0.22.1",
-    "underscore": "^1.9.1"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
